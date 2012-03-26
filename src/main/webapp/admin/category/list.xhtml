@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../../resources/templates/master.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:dataTable value="#{categoryController.allCategories}" var="cat">
+                        <f:facet name="header">  
+                            Список категорий  
+                        </f:facet>  
+                        <p:column>  
+                            <f:facet name="header">  
+                                ID  
+                            </f:facet>  
+                            <h:outputText value="#{cat.id}" />  
+                        </p:column>
+                        <p:column>  
+                            <f:facet name="header">  
+                                Название  
+                            </f:facet>  
+                            <h:outputText value="#{cat.title}" />  
+                        </p:column>
+                        <p:column>  
+                            <f:facet name="header">  
+                                Описание  
+                            </f:facet>  
+                            <h:outputText value="#{cat.description}" />  
+                        </p:column>
+                        <f:facet name="footer">  
+                            <p:commandLink action="add">Создать</p:commandLink>  
+                        </f:facet>  
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
