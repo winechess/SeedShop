@@ -12,31 +12,26 @@
 
             <ui:define name="content">
                 <h:form>
-                    <p:dataTable value="#{categoryController.allCategories}" var="cat">
-                        <f:facet name="header">  
-                            Список категорий  
-                        </f:facet>  
-                        <p:column>  
-                            <f:facet name="header">  
-                                ID  
-                            </f:facet>  
-                            <h:outputText value="#{cat.id}" />  
-                        </p:column>
-                        <p:column>  
-                            <f:facet name="header">  
-                                Название  
-                            </f:facet>  
-                            <h:outputText value="#{cat.title}" />  
-                        </p:column>
-                        <p:column>  
-                            <f:facet name="header">  
-                                Описание  
-                            </f:facet>  
-                            <h:outputText value="#{cat.description}" />  
-                        </p:column>
-                        <f:facet name="footer">  
-                            <p:commandLink action="add">Создать</p:commandLink>  
-                        </f:facet>  
+                    <p:dataTable value="#{categoryController.rootCategories}" var="rootCat" 
+                                 rowKey="#{rootCat.id}" selection="#{categoryController.selectedCategory}" 
+                                 selectionMode="single">
+                        <f:facet name="header">Список категорий:</f:facet>
+                        <p:column><p:rowToggler/></p:column>
+                        <p:column headerText="ID">#{rootCat.id}</p:column>
+                        <p:column headerText="Название">#{rootCat.title}</p:column>
+                        <p:column headerText="Описание">#{rootCat.description}</p:column>
+                        <p:rowExpansion>
+                            <p:dataTable value="#{rootCat.childCategories}" var="childCat"
+                                         rowKey="#{childCat.id}" selection="#{categoryController.selectedCategory}" selectionMode="single">
+                                <p:column headerText="ID">#{childCat.id}</p:column>
+                                <p:column headerText="Название">#{childCat.title}</p:column>
+                                <p:column headerText="Описание">#{childCat.description}</p:column>
+                            </p:dataTable>
+                        </p:rowExpansion>
+                        <f:facet name="footer">
+                            <p:commandButton ajax="false" action="edit" value="Редактировать категорию"/>
+                            <p:commandButton ajax="false" action="add" value="Создать новую категорию"/>
+                        </f:facet>
                     </p:dataTable>
                 </h:form>
             </ui:define>

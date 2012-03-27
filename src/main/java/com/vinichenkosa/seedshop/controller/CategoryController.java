@@ -6,9 +6,9 @@ package com.vinichenkosa.seedshop.controller;
 
 import com.vinichenkosa.seedshop.ejb.CategoryFacadeLocal;
 import com.vinichenkosa.seedshop.entity.Category;
+import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,13 +17,13 @@ import javax.inject.Named;
  * @author vinichenkosa
  */
 @Named(value = "categoryController")
-@Dependent
-@Stateless
-public class CategoryController {
+@SessionScoped
+public class CategoryController implements Serializable{
 
     private String title;
     private String description;
     private Category parentCategory;
+    private Category selectedCategory;
     @Inject
     private CategoryFacadeLocal facade;
 
@@ -71,6 +71,19 @@ public class CategoryController {
     
     public List<Category> getAllCategories(){
         return facade.findAll();
+    }
+
+    public Category getSelectedCategory() {
+        return selectedCategory;
+    }
+
+    public void setSelectedCategory(Category selectedCategory) {
+        this.selectedCategory = selectedCategory;
+    }
+    
+    public String editCategory(){
+        facade.edit(selectedCategory);
+        return "list";
     }
 
     public String createCategory(){

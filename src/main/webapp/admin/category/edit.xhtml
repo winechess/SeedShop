@@ -15,18 +15,18 @@
                     <p:panel header="Создание категории">
                         <h:panelGrid columns="2" cellspacing="5">
                             <h:outputText value="Название категории: "/>
-                            <p:inputText value="#{categoryController.title}"/>
+                            <p:inputText value="#{categoryController.selectedCategory.title}"/>
 
                             <h:outputText value="Описание категории"/>
-                            <p:inputTextarea value="#{categoryController.description}"/>
+                            <p:inputTextarea value="#{categoryController.selectedCategory.description}"/>
 
                             <h:outputText value="Родительская категория: "/>
-                            <p:selectOneMenu value="#{categoryController.parentCategory}" converter="#{categoryConverter}">
+                            <p:selectOneMenu value="#{categoryController.selectedCategory.parentCategory}" converter="#{categoryConverter}">
                                 <f:selectItem itemLabel="Select One" itemValue="" />  
                                 <f:selectItems value="#{categoryController.allCategories}" var="cat" itemLabel="#{cat.title}" itemValue="#{cat}"/>
                             </p:selectOneMenu>
                             <p:commandButton type="reset" value="Очистить"/>
-                            <p:commandButton type="submit" value="Создать" action="#{categoryController.createCategory()}" ajax="false"/>
+                            <p:commandButton type="submit" value="Редактировать" action="#{categoryController.editCategory()}" ajax="false"/>
                         </h:panelGrid>
                     </p:panel>
                 </h:form>
