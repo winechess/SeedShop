@@ -80,6 +80,10 @@ public class CategoryController implements Serializable{
     public void setSelectedCategory(Category selectedCategory) {
         this.selectedCategory = selectedCategory;
     }
+   
+    public void deleteCategory(){
+        facade.remove(selectedCategory);
+    }
     
     public String editCategory(){
         facade.edit(selectedCategory);
@@ -93,6 +97,12 @@ public class CategoryController implements Serializable{
         cat.setParentCategory(parentCategory);
         facade.create(cat);
         return "list";
+    }
+    
+    public int sortById(Category cat1, Category cat2){
+        if(cat1.getId()<cat2.getId()) return -1;
+        else if(cat1.getId()>cat2.getId()) return 1;
+        else return 0;
     }
 
 }

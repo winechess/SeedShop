@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -83,41 +85,14 @@
                 <ui:insert name="sidebar">
                     <ul>
                         <li>
-                            <h2>Aliquam tempus</h2>
-                            <p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.</p>
-                        </li>
-                        <li>
-                            <h2>Categories</h2>
-                            <ul>
-                                <li><a href="#">Aliquam libero</a></li>
-                                <li><a href="#">Consectetuer adipiscing elit</a></li>
-                                <li><a href="#">Metus aliquam pellentesque</a></li>
-                                <li><a href="#">Suspendisse iaculis mauris</a></li>
-                                <li><a href="#">Urnanet non molestie semper</a></li>
-                                <li><a href="#">Proin gravida orci porttitor</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h2>Blogroll</h2>
-                            <ul>
-                                <li><a href="#">Aliquam libero</a></li>
-                                <li><a href="#">Consectetuer adipiscing elit</a></li>
-                                <li><a href="#">Metus aliquam pellentesque</a></li>
-                                <li><a href="#">Suspendisse iaculis mauris</a></li>
-                                <li><a href="#">Urnanet non molestie semper</a></li>
-                                <li><a href="#">Proin gravida orci porttitor</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h2>Archives</h2>
-                            <ul>
-                                <li><a href="#">Aliquam libero</a></li>
-                                <li><a href="#">Consectetuer adipiscing elit</a></li>
-                                <li><a href="#">Metus aliquam pellentesque</a></li>
-                                <li><a href="#">Suspendisse iaculis mauris</a></li>
-                                <li><a href="#">Urnanet non molestie semper</a></li>
-                                <li><a href="#">Proin gravida orci porttitor</a></li>
-                            </ul>
+                            <c:forEach items="#{categoryController.rootCategories}" var="cat">
+                                <li><h2><h:outputText value="#{cat.title}"/></h2></li>
+                                <ul>
+                                    <c:forEach items="#{cat.childCategories}" var="child">
+                                        <li><h:outputText value="#{child.title}"/></li>
+                                    </c:forEach>
+                                </ul>
+                            </c:forEach>
                         </li>
                     </ul>
                 </ui:insert>
